@@ -69,7 +69,7 @@ class PluginAirwatchXml {
       //$this->setSoftwares();
       $this->setNetwork();
       $this->setAirwatchInfos();
-      $this->setCompliance();
+      //$this->setCompliance();
    }
 
    /**

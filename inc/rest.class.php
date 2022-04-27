@@ -45,7 +45,8 @@ class PluginAirwatchRest {
    *         - data if execution is a success
    */
    static function testConnection() {
-      return self::callApi('/help');
+      //return self::callApi('/help');
+      return self::callApi('/mdm/devices/search?pagesize=1');
    }
 
    /**
@@ -63,7 +64,7 @@ class PluginAirwatchRest {
 
       //Array to return API call informations
       $result = [];
-
+      set_time_limit(0);
       //Get airwatch access configuration
       $config = new PluginAirwatchConfig();
       $config->getFromDB(1);
@@ -88,6 +89,8 @@ class PluginAirwatchRest {
       curl_setopt($ch, CURLOPT_VERBOSE, 1);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_TIMEOUT,5000);
+      curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
 
       //Skip SSL check if requested in the plugin's configuration
       if ($config->fields['skip_ssl_check']) {
@@ -141,7 +144,7 @@ class PluginAirwatchRest {
    * @return devices informations as an array
    */
    static function getDevices() {
-      return self::callApiAndGetData('/mdm/devices/search');
+      return self::callApiAndGetData('/mdm/devices/search?pagesize=3000');
    }
 
    /**
