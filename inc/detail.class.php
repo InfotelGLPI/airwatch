@@ -117,7 +117,8 @@ class PluginAirwatchDetail extends CommonDBTM {
       echo "<td>" . __("Airwatch ID", "airwatch") . "</td>";
       echo "<td>";
       echo $detail->fields['aw_device_id'];
-      echo "<input type='hidden' name='aw_device_id' value='".$detail->fields['aw_device_id']."'>";
+      echo Html::hidden('id', ['aw_device_id' => $detail->fields['aw_device_id']]);
+
       echo "</td>";
       echo "</tr>";
 
@@ -249,8 +250,7 @@ class PluginAirwatchDetail extends CommonDBTM {
       if (self::canRefresh()) {
          echo "<tr class='tab_bg_1' align='center'>";
          echo "<td colspan='4' align='center'>";
-         echo "<input type='submit' name='update' value=\"" .
-            _sx("button", "Refresh inventory now") . "\" class='submit' >";
+         echo Html::submit(_sx('button', 'Refresh inventory now'), ['name' => 'update', 'class' => 'btn btn-primary']);
          echo"</td>";
          echo "</tr>";
       }
@@ -401,14 +401,17 @@ class PluginAirwatchDetail extends CommonDBTM {
    static function showYesNoNotSet($value, $show_warning = false) {
       switch ($value) {
          case -1:
-            return "<img src='../pics/ok2.png' title='".__('None')."'>";
+            return "<i class='fas fa-question fa-1x' title='".__('None')."'></i>
+            
+            
+            ";
          case 0:
             if ($show_warning) {
-               return "<img src='../pics/ko_min.png' title='".__('Error')."'>";
+               return "<i style='color:darkred' class='fas fa-exclamation-triangle fa-1x' title='".__('Error')."'></i>";
             }
-            return "<img src='../pics/reset.png' title='".__('No')."'>";
+            return "<i style='color:#CCC' class='fas fa-times-circle fa-1x' title='".__('No')."'></i>";
          case 1:
-            return "<img src='../pics/ok_min.png' title='".__('Yes')."'>";
+            return "<i style='color:forestgreen' class='fas fa-check fa-1x' title='".__('Yes')."'></i>";
       }
    }
 
@@ -427,9 +430,9 @@ class PluginAirwatchDetail extends CommonDBTM {
 
          //Install
          $query = "CREATE TABLE `glpi_plugin_airwatch_details` (
-                        `id` int NOT NULL auto_increment,
-                        `computers_id` int NOT NULL DEFAULT '0',
-                        `aw_device_id` int NOT NULL DEFAULT '0',
+                        `id` int unsigned NOT NULL auto_increment,
+                        `computers_id` int unsigned NOT NULL DEFAULT '0',
+                        `aw_device_id` int unsigned NOT NULL DEFAULT '0',
                         `imei` varchar(255) NOT NULL DEFAULT '',
                         `simcard_serial` varchar(255) NOT NULL DEFAULT '',
                         `phone_number` varchar(255) NOT NULL DEFAULT '',

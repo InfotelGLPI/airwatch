@@ -31,7 +31,7 @@
 define ('AIRWATCH_API_RESULT_OK', 'ok');
 define ('AIRWATCH_API_RESULT_ERROR', 'ko');
 define ('AIRWATCH_USER_AGENT', 'Airwatch-Connector-1.1');
-define ('PLUGIN_AIRWATCH_VERSION', '1.5.0');
+define ('PLUGIN_AIRWATCH_VERSION', '1.6.0');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_AIRWATCH_MIN_GLPI', '10.0.0');
@@ -58,10 +58,10 @@ function plugin_init_airwatch() {
          = ['Computer' =>  ['PluginAirwatchDetail', 'showInfo']];
 
       //FusionInventory hooks
-      $PLUGIN_HOOKS['fusioninventory_inventory']['airwatch']
-         = ['PluginAirwatchAirwatch', 'updateInventory'];
-      $PLUGIN_HOOKS['fusioninventory_addinventoryinfos']['airwatch']
-         = ['PluginAirwatchAirwatch', 'addInventoryInfos'];
+//      $PLUGIN_HOOKS['fusioninventory_inventory']['airwatch']
+//         = ['PluginAirwatchAirwatch', 'updateInventory'];
+//      $PLUGIN_HOOKS['fusioninventory_addinventoryinfos']['airwatch']
+//         = ['PluginAirwatchAirwatch', 'addInventoryInfos'];
    }
 }
 
@@ -76,9 +76,9 @@ function plugin_version_airwatch() {
          'glpi' => [
             'min'     => PLUGIN_AIRWATCH_MIN_GLPI,
             'max'     => PLUGIN_AIRWATCH_MAX_GLPI,
-            'plugins' => [
-               'fusioninventory',
-            ],
+//            'plugins' => [
+//               'fusioninventory',
+//            ],
          ],
          'php' => [
             'exts' => [

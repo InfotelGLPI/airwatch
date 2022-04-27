@@ -39,13 +39,12 @@ class PluginAirwatchConfig extends CommonDBTM {
       return __("GLPi Airwatch Connector", 'airwatch');
    }
 
-   public function showForm($ID, array $options = []) {
+   public function showSetupForm() {
       $this->getFromDB(1);
 
       echo "<div class='center'>";
       echo "<form name='form' method='post' action='" . $this->getFormURL() . "'>";
-
-      echo "<input type='hidden' name='id' value='1'>";
+      echo Html::hidden('id', ['value' => 1]);
 
       echo "<table class='tab_cadre_fixe'>";
 
@@ -134,8 +133,8 @@ class PluginAirwatchConfig extends CommonDBTM {
 
       echo "<tr class='tab_bg_1' align='center'>";
       echo "<td colspan='2' align='center'>";
-      echo "<input type='submit' name='update' value=\"" . _sx("button", "Post") . "\" class='submit' >";
-      echo "&nbsp;<input type='submit' name='test' value=\"" . _sx("button", "Test") . "\" class='submit' >";
+      echo Html::submit(_sx('button', 'Post'), ['name' => 'update', 'class' => 'btn btn-primary']);
+      echo Html::submit(_sx('button', 'Test'), ['name' => 'test', 'class' => 'btn btn-primary']);
       echo"</td>";
       echo "</tr>";
 
@@ -160,7 +159,7 @@ class PluginAirwatchConfig extends CommonDBTM {
 
          //Install
          $query = "CREATE TABLE `glpi_plugin_airwatch_configs` (
-                     `id` int NOT NULL auto_increment,
+                     `id` int unsigned NOT NULL auto_increment,
                      `fusioninventory_url` varchar(255) NOT NULL,
                      `airwatch_service_url` varchar(255) NOT NULL,
                      `airwatch_console_url` varchar(255) NOT NULL,

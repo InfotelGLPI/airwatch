@@ -51,7 +51,7 @@ if (isset($_POST["update"])) {
              "config");
 
    Session::checkRight("config", UPDATE);
-   $config->showForm();
+   $config->showSetupForm();
 
    Html::footer();
 
