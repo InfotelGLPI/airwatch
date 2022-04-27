@@ -263,7 +263,14 @@ class PluginAirwatchAirwatch extends CommonDBTM {
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
       curl_setopt($ch, CURLOPT_REFERER, $config->getField('fusioninventory_url'));
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       $ch_result = curl_exec($ch);
+      //Get curl error
+      $error = curl_error($ch);
+      if($error){
+         Toolbox::logWarning($error);
+      }
       curl_close($ch);
    }
 
