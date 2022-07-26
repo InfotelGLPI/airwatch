@@ -42,8 +42,7 @@ function plugin_init_airwatch() {
    global $PLUGIN_HOOKS,$CFG_GLPI,$LANG;
    $PLUGIN_HOOKS['csrf_compliant']['airwatch'] = true;
 
-   $plugin = new Plugin();
-   if ($plugin->isActivated('airwatch')) {
+   if (Plugin::isPluginActive('airwatch')) {
 
       Plugin::registerClass('PluginAirwatchDetail', ['addtabon' => ['Computer']]);
 
